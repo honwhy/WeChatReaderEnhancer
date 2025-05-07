@@ -29,11 +29,11 @@
 
 /* 阅读进度指示器 */
 .wechat-toc-progress-bar {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
-  width: 3px;
-  height: 0%;
+  height: 3px;
+  width: 0%;
   background-color: #1e88e5;
   transition: height 0.3s ease;
   z-index: 10001;

@@ -1,7 +1,7 @@
 {
   "name": "wechat-reader-enhancer",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "description": "为微信公众号文章生成结构化目录，提升阅读体验",
   "scripts": {

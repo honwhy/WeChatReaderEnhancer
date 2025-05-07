@@ -65,7 +65,7 @@ export function updateProgressBar(percentage: number): void {
 
   // 确保百分比在有效范围内
   const validPercentage = Math.max(0, Math.min(100, percentage))
-  progressBar.style.height = `${validPercentage}%`
+  progressBar.style.width = `${validPercentage}%`
 }
 
 /**
