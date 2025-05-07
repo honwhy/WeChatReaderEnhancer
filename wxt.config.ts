@@ -3,6 +3,7 @@ import { defineConfig } from 'wxt'
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
+  entrypointsDir: `src`,
   modules: [`@wxt-dev/module-vue`],
   manifest: ({ mode }) => ({
     name: `公众号阅读增强器`,

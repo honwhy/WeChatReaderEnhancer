@@ -4,6 +4,7 @@ import type { Settings, TocItem } from '../types'
 import { onMounted, onUnmounted, ref, toRaw } from 'vue'
 import { useSettings } from '../composable/config'
 import { addClass, createElement, findHeadings, removeClass, scrollToElement, toggleClass } from '../utils/dom'
+import { getReadingPosition } from '../utils/storage'
 import Footer from './Footer.vue'
 import { destroyImageViewer, initImageViewer } from './imageViewer'
 import { destroyScrollObserver, initScrollObserver } from './observer'
@@ -113,6 +114,11 @@ function handleSettingsChange(settings: Settings) {
 
 onMounted(async () => {
   await init()
+  // 获取上次阅读位置并滚动到对应位置
+  const lastPosition = await getReadingPosition(window.location.href)
+  if (lastPosition?.position) {
+    window.scrollTo({ top: lastPosition.position, behavior: `smooth` })
+  }
   // 初始化图片查看器
   initImageViewer()
 })

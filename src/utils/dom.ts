@@ -86,34 +86,35 @@ export function toggleClass(
 export function findHeadings(
   container: HTMLElement = document.body,
   minLevel: number = 1,
-  maxLevel: number = 6
+  maxLevel: number = 6,
 ): HTMLElement[] {
   try {
     const selectors = Array.from(
       { length: maxLevel - minLevel + 1 },
-      (_, i) => `h${i + minLevel}`
-    ).join(", ");
+      (_, i) => `h${i + minLevel}`,
+    ).join(`, `)
 
     // 获取所有标题元素
-    const headings = Array.from(container.querySelectorAll(selectors));
+    const headings = Array.from(container.querySelectorAll(selectors))
 
     // 过滤掉空白的标题元素和嵌套在列表项中的标题
     return headings.filter((heading) => {
       // 获取文本内容并去除空格
-      const text = heading.textContent?.trim() || "";
+      const text = heading.textContent?.trim() || ``
 
       // 检查标题是否有实际内容
-      const hasContent = text.length > 0;
+      const hasContent = text.length > 0
 
       // 检查标题是否嵌套在列表项中
-      const isNestedInListItem = !!heading.closest("li");
+      const isNestedInListItem = !!heading.closest(`li`)
 
       // 只保留有内容且不在列表项中的标题
-      return hasContent && !isNestedInListItem;
-    }) as HTMLElement[];
-  } catch (error) {
-    console.error("查找标题元素失败:", error);
-    return [];
+      return hasContent && !isNestedInListItem
+    }) as HTMLElement[]
+  }
+  catch (error) {
+    console.error(`查找标题元素失败:`, error)
+    return []
   }
 }
 
