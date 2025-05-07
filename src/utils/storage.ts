@@ -1,3 +1,5 @@
+import type { ReadingPosition } from '../types'
+
 /**
  * 保存用户上次阅读位置
  * @param url 文章URL
@@ -7,7 +9,7 @@ export function saveReadingPosition(url: string, position: number): void {
   const key = `reading_position_${hashString(url)}`
   const data = { url, position, timestamp: Date.now() }
 
-  storage.setItem(`sync:${key}`, data)
+  storage.setItem<ReadingPosition>(`sync:${key}`, data)
 }
 
 /**
@@ -17,7 +19,7 @@ export function saveReadingPosition(url: string, position: number): void {
  */
 export async function getReadingPosition(url: string) {
   const key = `reading_position_${hashString(url)}`
-  const data = await storage.getItem(`sync:${key}`)
+  const data = await storage.getItem<ReadingPosition>(`sync:${key}`)
   return data
 }
 /**

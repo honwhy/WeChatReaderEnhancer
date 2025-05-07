@@ -7,12 +7,12 @@ export const defaultSettings: Settings = {
   maxLevel: 6, // 识别的最大标题级别
   isEnabled: true, // 插件是否启用
 }
-export function useSettings(handleSettingsChange: (settings: Settings | null) => void) {
+export function useSettings(handleSettingsChange: (settings: Settings) => void) {
   const settings = ref<Settings>({ ...defaultSettings })
 
   const unwatch = storage.watch<Settings>(`sync:settings`, (newSettings) => {
     settings.value = newSettings || { ...defaultSettings }
-    handleSettingsChange(newSettings)
+    handleSettingsChange(newSettings!)
   })
 
   function updateSettings(newSettings: Settings) {

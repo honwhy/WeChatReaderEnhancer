@@ -17,10 +17,12 @@
   },
   "dependencies": {
     "medium-zoom": "^1.1.0",
+    "qrcode": "^1.5.4",
     "vue": "^3.5.13"
   },
   "devDependencies": {
     "@antfu/eslint-config": "3.11.0",
+    "@types/qrcode": "^1.5.5",
     "@unocss/eslint-plugin": "^66.1.0",
     "@vitejs/plugin-vue-jsx": "^4.1.2",
     "@wxt-dev/module-vue": "^1.0.2",

@@ -449,3 +449,21 @@
 .wechat-toc-container.wechat-toc-minimized .wechat-toc-footer {
   display: none !important;
 }
+
+/* 添加二维码悬浮框样式 */
+.wechat-toc-qrcode-container {
+  position: fixed;
+  right: 40px;
+  top: 100px;
+  width: 150px;
+  height: 150px;
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}

@@ -19,13 +19,14 @@ watch(
 const min = 200
 const max = 400
 
-function handleRangeInput(e: MouseEvent) {
-  console.log(`handleRangeInput 输入`, e.target.value)
-  if (!e.target.value && e.target.value !== 0) {
+function handleRangeInput(e: Event) {
+  const value = (e.target as HTMLInputElement).value
+  console.log(`handleRangeInput 输入`, value)
+  if (!value && value !== `0`) {
     tocWidth.value = defaultSettings.tocWidth
   }
   else {
-    const data = Number.parseInt(e.target.value, 10)
+    const data = Number.parseInt(value, 10)
     if (data > max) {
       tocWidth.value = max
     }
@@ -53,9 +54,10 @@ const rangeProgressStyle = computed(() => {
     width: `${percentage}% !important`,
   }
 })
-function handleDrapInput(e: MouseEvent) {
-  console.log(`拖动输入`, e.target.value)
-  tocWidth.value = Number.parseInt(e.target.value, 10)
+function handleDrapInput(e: Event) {
+  const value = (e.target as HTMLInputElement).value
+  console.log(`拖动输入`, value)
+  tocWidth.value = Number.parseInt(value, 10)
   settings.value.tocWidth = tocWidth.value
   updateSettings(settings.value)
 }

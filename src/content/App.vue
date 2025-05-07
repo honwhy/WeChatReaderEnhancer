@@ -1,6 +1,7 @@
 <script setup lang="tsx">
 import type { PropType } from 'vue'
 import type { Settings, TocItem } from '../types'
+import QRCode from 'qrcode'
 import { onMounted, onUnmounted, ref, toRaw } from 'vue'
 import { useSettings } from '../composable/config'
 import { addClass, createElement, findHeadings, removeClass, scrollToElement, toggleClass } from '../utils/dom'
@@ -111,7 +112,24 @@ function handleSettingsChange(settings: Settings) {
     init()
   }
 }
+function createQrCode() {
+  // 添加二维码悬浮框
+  const qrCodeContainer = createElement(`div`, {
+    class: `wechat-toc-qrcode-container`,
+    title: `扫描二维码在手机上阅读`,
+  })
+  const targets = document.getElementsByTagName(`wechat-toc`)
+  const body = targets[0]!.shadowRoot
+  body!.appendChild(qrCodeContainer)
 
+  // 生成二维码
+  const qrCodeCanvas = createElement(`canvas`)
+  qrCodeContainer.appendChild(qrCodeCanvas)
+  QRCode.toCanvas(qrCodeCanvas, window.location.href, { width: 150 }, (error: any) => {
+    if (error)
+      console.error(`二维码生成失败:`, error)
+  })
+}
 onMounted(async () => {
   await init()
   // 获取上次阅读位置并滚动到对应位置
@@ -121,6 +139,7 @@ onMounted(async () => {
   }
   // 初始化图片查看器
   initImageViewer()
+  createQrCode()
 })
 onUnmounted(() => {
   cleanup()
@@ -200,18 +219,18 @@ const TocItemItem = defineComponent({
     function onToggleIconClick() {
       // 切换子项的展开状态
       toggleItemExpansion(props.item)
-      toggleClass(toggleIconRef.value, `expanded`, props.item.isExpanded)
-      toggleClass(toggleIconRef.value, `collapsed`, !props.item.isExpanded)
+      toggleClass(toggleIconRef.value!, `expanded`, props.item.isExpanded)
+      toggleClass(toggleIconRef.value!, `collapsed`, !props.item.isExpanded)
       // 找到子目录列表
-      const childList = itemRef.value.querySelector(`ul`)
+      const childList = itemRef.value!.querySelector(`ul`)
       if (childList) {
         toggleClass(childList, `wechat-toc-hidden`, !props.item.isExpanded)
       }
     }
-    function onItemClick(e) {
+    function onItemClick(e: { preventDefault: () => void }) {
       e.preventDefault()
       scrollToElement(props.item.element, 60)
-      highlightTocItem(itemRef.value)
+      highlightTocItem(itemRef.value!)
     }
     return () => {
       const className = `wechat-toc-item wechat-toc-level-${props.item.level}`
@@ -229,7 +248,7 @@ const TocItemItem = defineComponent({
                 )
               : null
           }
-          <a href={`#${props.item.id}`} class="wechat-toc-link" onClick={e => onItemClick(e)}>
+          <a href={`#${props.item.id}`} class="wechat-toc-link" onClick={(e: any) => onItemClick(e)}>
             {props.item.text}
           </a>
           <div class="wechat-toc-preview">{previewText}</div>

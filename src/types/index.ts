@@ -37,4 +37,9 @@ export type BackgroundMessage =
 // 背景脚本响应类型
 export type BackgroundResponse = { settings: Settings } | { success: boolean }
 
+export interface ReadingPosition {
+  url: string // 文章URL
+  position: number // 滚动位置
+  timestamp: number // 时间戳
+}
 export default {}
