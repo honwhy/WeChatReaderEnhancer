@@ -58,7 +58,7 @@
 1. 克隆仓库
 
    ```bash
-   git clone https://github.com/username/WeChatReaderEnhancer.git
+   git clone https://github.com/honwhy/WeChatReaderEnhancer.git
    cd WeChatReaderEnhancer
    ```
 
@@ -102,6 +102,7 @@
 WeChatReaderEnhancer/
 ├── src/                   # 源代码
 │   ├── background/        # 背景脚本
+│   ├── composable/        # Hooks
 │   ├── content/           # 内容脚本（目录、图片查看器等）
 │   ├── popup/             # 弹出窗口
 │   ├── styles/            # 样式文件
@@ -125,7 +126,7 @@ WeChatReaderEnhancer/
 1. 克隆仓库并安装依赖
 
    ```bash
-   git clone https://github.com/username/WeChatReaderEnhancer.git
+   git clone https://github.com/honwhy/WeChatReaderEnhancer.git
    cd WeChatReaderEnhancer
    npm install
    ```
@@ -165,8 +166,8 @@ A: 插件经过性能优化，对页面加载速度影响极小。它仅在页�
 
 ## 📞 联系方式
 
-- 项目仓库: [GitHub](https://github.com/username/WeChatReaderEnhancer)
-- 问题反馈: [Issues](https://github.com/username/WeChatReaderEnhancer/issues)
+- 项目仓库: [GitHub](https://github.com/honwhy/WeChatReaderEnhancer)
+- 问题反馈: [Issues](https://github.com/honwhy/WeChatReaderEnhancer/issues)
 - 关注开发者:
   - [即刻](https://web.okjike.com/u/ec41d7d5-407d-4395-ac8a-bd0f04fb202c)
   - [推特X](https://x.com/huangzh65903362)
