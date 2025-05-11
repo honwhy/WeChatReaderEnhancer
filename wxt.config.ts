@@ -4,7 +4,7 @@ import { defineConfig } from 'wxt'
 // See https://wxt.dev/api/config.html
 export default defineConfig({
   entrypointsDir: `src`,
-  modules: [`@wxt-dev/module-vue`],
+  modules: [`@wxt-dev/module-vue`, `@wxt-dev/webextension-polyfill`],
   manifest: ({ mode }) => ({
     name: `公众号阅读增强器`,
     icons: {
@@ -18,7 +18,6 @@ export default defineConfig({
       },
     ],
   }),
-  // @ts-expect-error cannot find Vite PluginOption export
   vite: () => ({
     plugins: [
       vueJsx(),

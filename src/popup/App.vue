@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import type { Settings } from '../types'
-import { computed, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { defaultSettings, useSettings } from '../composable/config'
+import { serviceOptions } from '../utils/models'
 
 function handleSettingsChange(newSettings: Settings) {
   // Handle settings change
@@ -65,6 +66,18 @@ function onReset() {
   resetSettings()
   tocWidth.value = settings.value.tocWidth
   showMessage(`已恢复默认宽度`)
+}
+/** 当前服务信息 */
+const currentService = computed(
+  () => serviceOptions.find(s => s.value === settings.value.serviceType) || serviceOptions[0],
+)
+function handleModelSettingsChange() {
+  if (settings.value.serviceType && settings.value.apiKey && settings.value.modelName) {
+    settings.value.apiKey = settings.value.apiKey.trim()
+    settings.value.endpoint = currentService.value.endpoint
+    updateSettings(settings.value)
+    showMessage(`模型设置已保存`)
+  }
 }
 // 显示消息
 function showMessage(message: string, isError: boolean = false) {
@@ -147,7 +160,57 @@ function showMessage(message: string, isError: boolean = false) {
       </button>
     </div>
   </div>
-
+  <!-- ai model -->
+  <div class="card">
+    <div class="card-title">
+      <span class="icon">
+        <svg class="svg-icon" viewBox="0 0 24 24">
+          <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z" />
+        </svg>
+      </span>
+      AI 模型设置
+    </div>
+    <div class="card-subtitle">
+      使用 AI 助手帮助您更好地理解文章内容
+    </div>
+    <label>服务类型</label>
+    <div class="flex">
+      <select
+        v-model="settings.serviceType"
+        style="width: 100%;"
+        aria-label="服务类型"
+        @change="handleModelSettingsChange"
+      >
+        <option v-for="(option, index) in serviceOptions" :key="index" :value="option.value">
+          {{ option.label }}
+        </option>
+      </select>
+    </div>
+    <label>API Key</label>
+    <div class="flex">
+      <input
+        v-model="settings.apiKey"
+        style="width: 100%;"
+        type="password"
+        aria-label="API Key"
+        placeholder="sk-..."
+        @blur="handleModelSettingsChange"
+      >
+    </div>
+    <label>模型名词</label>
+    <div class="flex">
+      <select
+        v-model="settings.modelName"
+        style="width: 100%;"
+        aria-label="模型名词"
+        @change="handleModelSettingsChange"
+      >
+        <option v-for="(option, index) in currentService.models" :key="index" :value="option">
+          {{ option }}
+        </option>
+      </select>
+    </div>
+  </div>
   <div class="card">
     <div class="card-title">
       <span class="icon">
@@ -193,6 +256,19 @@ function showMessage(message: string, isError: boolean = false) {
           </div>
         </div>
       </li>
+      <li class="feature-item">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bot-icon h-5 w-5"><path d="M12 8V4H8" /><rect width="16" height="12" x="4" y="8" rx="2" /><path d="M2 14h2" /><path d="M20 14h2" /><path d="M15 13v2" /><path d="M9 13v2" /></svg>
+        </div>
+        <div class="feature-text">
+          <div class="feature-title">
+            AI 智能总结
+          </div>
+          <div class="feature-desc">
+            自动生成文章摘要，快速获取关键信息，节省阅读时间
+          </div>
+        </div>
+      </li>
     </ul>
   </div>
 
@@ -227,7 +303,24 @@ function showMessage(message: string, isError: boolean = false) {
           流光卡片 - 文字卡片制作工具
         </a>
       </li>
-      <!-- Add more links here if needed -->
+      <li class="friend-link-item">
+        <a
+          href="https://honwhy.wang"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="作者的个人网站 - Honwhy"
+        >
+          <!-- You might need a local icon or keep it simple -->
+          <!-- <img src="path/to/liuguangka-icon.png" alt="流光卡片 icon" class="link-icon"> -->
+          <svg class="svg-icon link-icon" viewBox="0 0 24 24">
+            <path
+              d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"
+            />
+          </svg>
+          <!-- Generic link icon -->
+          作者的个人网站 - Honwhy
+        </a>
+      </li>
     </ul>
   </div>
 </template>

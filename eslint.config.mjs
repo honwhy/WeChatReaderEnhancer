@@ -5,7 +5,7 @@ export default antfu({
   unocss: true,
   typescript: true,
   formatters: true,
-  ignores: [`.github`, `docs`],
+  ignores: [`.github`, `docs`, `declarations.d.ts`, `.output`, `.wxt`, `node_modules`],
 }, {
   rules: {
     'semi': [`error`, `never`],

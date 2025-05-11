@@ -18,6 +18,10 @@ export interface Settings {
   minLevel: number // 识别的最小标题级别
   maxLevel: number // 识别的最大标题级别
   isEnabled: boolean // 插件是否启用
+  serviceType: string // 模型服务类型
+  endpoint: string // 模型API地址
+  apiKey: string // 模型API密钥
+  modelName: string // 模型名称
 }
 
 // 脚本泄露报告
@@ -43,3 +47,32 @@ export interface ReadingPosition {
   timestamp: number // 时间戳
 }
 export default {}
+
+// 请求类型
+export enum MessageType {
+  GET_SUMMARY, // 获取摘要
+}
+export interface Requests {
+  type: MessageType // 请求类型
+  url: string // 请求的URL
+  method: string // 请求方法
+  data: any // 请求体
+}
+
+export interface Responses {
+  code: number // 响应状态码
+  data: any // 响应体
+  message: string // 响应消息
+}
+
+export interface ChatCompletionResponse {
+  choices: Choice[]
+}
+
+export interface Choice {
+  message: Message
+}
+
+export interface Message {
+  content: string
+}

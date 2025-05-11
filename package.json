@@ -1,7 +1,7 @@
 {
   "name": "wechat-reader-enhancer",
   "type": "module",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "private": true,
   "description": "为微信公众号文章生成结构化目录，提升阅读体验",
   "scripts": {
@@ -16,17 +16,27 @@
     "postinstall": "simple-git-hooks && wxt prepare"
   },
   "dependencies": {
+    "@joplin/turndown-plugin-gfm": "^1.0.62",
+    "@wxt-dev/webextension-polyfill": "^1.0.0",
+    "cheerio": "^1.0.0",
+    "marked": "^15.0.11",
     "medium-zoom": "^1.1.0",
+    "ofetch": "^1.4.1",
     "qrcode": "^1.5.4",
-    "vue": "^3.5.13"
+    "reading-time": "^1.5.0",
+    "turndown": "^7.2.0",
+    "vue": "^3.5.13",
+    "webextension-polyfill": "^0.12.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "3.11.0",
     "@types/qrcode": "^1.5.5",
+    "@types/turndown": "^5.0.5",
     "@unocss/eslint-plugin": "^66.1.0",
     "@vitejs/plugin-vue-jsx": "^4.1.2",
     "@wxt-dev/module-vue": "^1.0.2",
     "eslint": "^9.23.0",
+    "eslint-plugin-format": "^1.0.1",
     "simple-git-hooks": "^2.12.1",
     "typescript": "5.6.3",
     "unocss": "^66.1.0",

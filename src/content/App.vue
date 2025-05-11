@@ -1,11 +1,14 @@
 <script setup lang="tsx">
-import type { PropType } from 'vue'
-import type { Settings, TocItem } from '../types'
+import type { ChatCompletionResponse, Settings, TocItem } from '../types'
+import { marked } from 'marked'
 import QRCode from 'qrcode'
-import { onMounted, onUnmounted, ref, toRaw } from 'vue'
+import readingTime from 'reading-time/lib/reading-time'
+import { onMounted, onUnmounted, type PropType, ref, toRaw } from 'vue'
 import { useSettings } from '../composable/config'
+import { MessageType } from '../types'
 import { addClass, createElement, findHeadings, removeClass, scrollToElement, toggleClass } from '../utils/dom'
 import { getReadingPosition } from '../utils/storage'
+import { transformHtml2Markdown } from '../utils/turndown'
 import Footer from './Footer.vue'
 import { destroyImageViewer, initImageViewer } from './imageViewer'
 import { destroyScrollObserver, initScrollObserver } from './observer'
@@ -130,6 +133,54 @@ function createQrCode() {
       console.error(`二维码生成失败:`, error)
   })
 }
+// ai summary
+async function createSummary() {
+  // find js content
+  const jsContent = document.querySelector(`#js_content`)
+  if (!jsContent) {
+    console.warn(`未找到 js_content`)
+    return
+  }
+  const articleData = await transformHtml2Markdown(document.body.outerHTML)
+  console.log(`articleData`, articleData)
+  if (articleData.success) {
+    const { title, content } = articleData.data!
+    browser.runtime.sendMessage({
+      type: MessageType.GET_SUMMARY,
+      data: {
+        title,
+        content,
+      },
+    }).then(async (resp: ChatCompletionResponse) => {
+      const content = resp.choices[0].message.content
+      if (content) {
+        console.log(`AI摘要:`, resp)
+        const summaryContainer = createElement(`blockquote`, {
+          class: `wechat-toc-summary-container`,
+          title: `AI摘要`,
+        })
+        console.log(`articleData content`, content)
+        const html = await marked(content)
+        summaryContainer.innerHTML = html
+        jsContent.prepend(summaryContainer)
+      }
+    })
+  }
+}
+async function addReadingTime() {
+  const metaContent = document.querySelector(`#meta_content`)
+  if (!metaContent) {
+    console.warn(`未找到 meta_content`)
+    return
+  }
+  const { minutes } = readingTime(document.body.textContent)
+  const readingTimeContainer = createElement(`span`, {
+    class: `rich_media_meta rich_media_meta_text wechat-toc-reading-time`,
+    title: `预计阅读时间`,
+  })
+  readingTimeContainer.textContent = `(阅读大约需 ${Number.parseInt(minutes)} 分钟)`
+  metaContent.append(readingTimeContainer)
+}
 onMounted(async () => {
   await init()
   // 获取上次阅读位置并滚动到对应位置
@@ -140,6 +191,8 @@ onMounted(async () => {
   // 初始化图片查看器
   initImageViewer()
   createQrCode()
+  createSummary()
+  addReadingTime()
 })
 onUnmounted(() => {
   cleanup()

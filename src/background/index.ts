@@ -3,7 +3,10 @@
  * 处理扩展生命周期和全局状态
  */
 
+import type { Requests } from '../types'
 import { defaultSettings } from '../composable/config'
+import { MessageType } from '../types'
+import { chat } from './agent'
 
 export default defineBackground(() => {
   console.log(`公众号阅读增强插件背景服务工作进程已启动`, { id: browser.runtime.id })
@@ -20,4 +23,11 @@ export default defineBackground(() => {
       }
     },
   )
+  browser.runtime.onMessage.addListener((message: Requests, sender) => {
+    console.log(`收到消息`, { message, sender })
+    if (message.type === MessageType.GET_SUMMARY) {
+      return chat(message.data)
+    }
+    return true
+  })
 })
