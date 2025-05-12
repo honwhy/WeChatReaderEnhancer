@@ -153,6 +153,36 @@ function showMessage(message: string, isError: boolean = false) {
         @input="handleDrapInput"
       >
     </div>
+    <!-- 目录位置 -->
+    <label>目录位置</label>
+    <div class="flex-between">
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <label>
+          <input
+            v-model="settings.tocPosition"
+            type="radio"
+            value="left"
+            aria-label="左侧"
+            title="左侧"
+            name="tocPosition"
+            @change="updateSettings(settings)"
+          >
+          左侧
+        </label>
+        <label>
+          <input
+            v-model="settings.tocPosition"
+            type="radio"
+            value="right"
+            aria-label="右侧"
+            title="右侧"
+            name="tocPosition"
+            @change="updateSettings(settings)"
+          >
+          右侧
+        </label>
+      </div>
+    </div>
 
     <div class="buttons">
       <button id="resetButton" class="secondary" @click="onReset">

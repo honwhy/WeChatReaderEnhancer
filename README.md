@@ -177,3 +177,4 @@ A: 插件经过性能优化，对页面加载速度影响极小。它仅在页�
 ## 🙏 鸣谢
 
 - [medium-zoom](https://github.com/francoischalifour/medium-zoom) - 提供优秀的图片缩放功能
+- [linkify-it](https://github.com/markdown-it/linkify-it) - 提供高效的链接识别功能

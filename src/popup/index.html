@@ -125,7 +125,32 @@
         outline: none;
         box-shadow: 0 0 0 2px rgba(1, 204, 122, 0.2);
       }
+      /* 优化 radio 样式 */
+      input[type='radio'] {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        border: 2px solid var(--primary-color);
+        border-radius: 50%;
+        outline: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background-color: white;
+      }
 
+      input[type='radio']:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      input[type='radio']:hover {
+        box-shadow: 0 0 4px rgba(1, 204, 122, 0.5);
+      }
+
+      input[type='radio']:focus {
+        box-shadow: 0 0 0 2px rgba(1, 204, 122, 0.3);
+      }
       .flex-between {
         display: flex;
         justify-content: space-between;

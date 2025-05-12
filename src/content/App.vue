@@ -11,6 +11,7 @@ import { getReadingPosition } from '../utils/storage'
 import { transformHtml2Markdown } from '../utils/turndown'
 import Footer from './Footer.vue'
 import { destroyImageViewer, initImageViewer } from './imageViewer'
+import { destroyLinkifier, initLinkifier } from './linkifier'
 import { destroyScrollObserver, initScrollObserver } from './observer'
 import { buildTocTree, findArticleContainer, getArticleTitle, toggleItemExpansion } from './toc'
 import {
@@ -23,24 +24,61 @@ const { settings } = useSettings(handleSettingsChange)
 const articleTitle = ref(``)
 const itemList = ref<TocItem[]>([])
 
-function addVerticalText() {
-  // 添加收起状态下的竖向文字
-  const verticalText = createElement(
-    `div`,
-    {
-      class: `wechat-toc-vertical-text`,
-      title: `展开目录`,
-    },
-    `文章目录`,
+// function addVerticalText() {
+//   // 添加收起状态下的竖向文字
+//   const verticalText = createElement(
+//     `div`,
+//     {
+//       class: `wechat-toc-vertical-text`,
+//       title: `展开目录`,
+//     },
+//     `文章目录`,
+//   )
+
+//   // 为竖向文字添加点击事件，点击时展开目录
+//   verticalText.addEventListener(`click`, () => {
+//     expandTocPanel()
+//   })
+
+//   // 添加到页面
+//   document.body.appendChild(verticalText)
+// }
+
+function buildToc() {
+  // 如果插件被禁用，直接返回
+  if (!settings.value.isEnabled) {
+    console.log(`公众号阅读增强插件已禁用`)
+    return
+  }
+
+  // 查找文章容器
+  const articleContainer = findArticleContainer()
+  if (!articleContainer) {
+    console.warn(`未找到文章容器`)
+    return
+  }
+
+  // 识别文章中的标题
+  const headingElements = findHeadings(
+    articleContainer,
+    settings.value.minLevel,
+    settings.value.maxLevel,
   )
 
-  // 为竖向文字添加点击事件，点击时展开目录
-  verticalText.addEventListener(`click`, () => {
-    expandTocPanel()
-  })
+  if (headingElements.length === 0) {
+    console.warn(`未找到标题元素`)
+    return
+  }
 
-  // 添加到页面
-  document.body.appendChild(verticalText)
+  // 构建目录树
+  itemList.value = buildTocTree(headingElements)
+  if (itemList.value.length === 0) {
+    console.warn(`生成目录树失败`)
+    return
+  }
+  console.log(`生成目录树成功`, itemList.value)
+  // 获取文章标题
+  articleTitle.value = getArticleTitle()
 }
 /**
  * 初始化插件
@@ -49,40 +87,7 @@ async function init() {
   try {
     console.log(`公众号阅读增强插件启动中...`)
 
-    // 如果插件被禁用，直接返回
-    if (!settings.value.isEnabled) {
-      console.log(`公众号阅读增强插件已禁用`)
-      return
-    }
-
-    // 查找文章容器
-    const articleContainer = findArticleContainer()
-    if (!articleContainer) {
-      console.warn(`未找到文章容器`)
-      return
-    }
-
-    // 识别文章中的标题
-    const headingElements = findHeadings(
-      articleContainer,
-      settings.value.minLevel,
-      settings.value.maxLevel,
-    )
-
-    if (headingElements.length === 0) {
-      console.warn(`未找到标题元素`)
-      return
-    }
-
-    // 构建目录树
-    itemList.value = buildTocTree(headingElements)
-    if (itemList.value.length === 0) {
-      console.warn(`生成目录树失败`)
-      return
-    }
-    console.log(`生成目录树成功`, itemList.value)
-    // 获取文章标题
-    articleTitle.value = getArticleTitle()
+    buildToc()
 
     // 恢复面板状态（展开/折叠）
     restorePanelState()
@@ -90,11 +95,29 @@ async function init() {
     // 初始化滚动监听
     initScrollObserver(toRaw(itemList.value))
 
-    addVerticalText()
+    // addVerticalText()
+    initLinkifier()
     console.log(`公众号阅读增强插件初始化完成`)
   }
   catch (error) {
     console.error(`公众号阅读增强插件初始化失败:`, error)
+  }
+}
+/**
+ * 更新操作
+ */
+async function update() {
+  try {
+    console.log(`公众号阅读增强插件更新中...`)
+    buildToc()
+    destroyScrollObserver()
+    removeQrCode()
+    // 初始化滚动监听
+    initScrollObserver(toRaw(itemList.value))
+    createQrCode()
+  }
+  catch (error) {
+    console.error(`公众号阅读增强插件更新失败:`, error)
   }
 }
 const tocContainerRef = ref<HTMLElement | null>(null)
@@ -106,19 +129,20 @@ async function cleanup() {
   articleTitle.value = ``
   destroyImageViewer()
   destroyScrollObserver()
+  destroyLinkifier()
 }
 function handleSettingsChange(settings: Settings) {
   if (!settings.isEnabled) {
     cleanup()
   }
   else {
-    init()
+    update()
   }
 }
 function createQrCode() {
   // 添加二维码悬浮框
   const qrCodeContainer = createElement(`div`, {
-    class: `wechat-toc-qrcode-container`,
+    class: `wechat-toc-qrcode-container${settings.value.tocPosition === `right` ? ` is-right` : ``}`,
     title: `扫描二维码在手机上阅读`,
   })
   const targets = document.getElementsByTagName(`wechat-toc`)
@@ -132,6 +156,15 @@ function createQrCode() {
     if (error)
       console.error(`二维码生成失败:`, error)
   })
+}
+// remove qrcode
+function removeQrCode() {
+  const targets = document.getElementsByTagName(`wechat-toc`)
+  const body = targets[0]!.shadowRoot
+  const qrCodeContainer = body!.querySelector(`.wechat-toc-qrcode-container`)
+  if (qrCodeContainer) {
+    qrCodeContainer.remove()
+  }
 }
 // ai summary
 async function createSummary() {
@@ -322,7 +355,11 @@ const TocItemItem = defineComponent({
 </script>
 
 <template>
-  <div id="wechat-toc-container" ref="tocContainerRef" class="wechat-toc-container" :style="{ width: `${settings.tocWidth}px` }">
+  <div
+    id="wechat-toc-container" ref="tocContainerRef" class="wechat-toc-container"
+    :class="{ 'is-right': settings.tocPosition === 'right' }"
+    :style="{ width: `${settings.tocWidth}px` }"
+  >
     <!-- 阅读进度指示器 -->
     <div class="wechat-toc-progress-bar" />
     <!-- 标题栏 -->

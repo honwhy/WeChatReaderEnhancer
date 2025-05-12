@@ -26,7 +26,10 @@
     transform 0.3s ease,
     width 0.3s ease;
 }
-
+.wechat-toc-container.is-right {
+  left: unset;
+  right: 0;
+}
 /* 阅读进度指示器 */
 .wechat-toc-progress-bar {
   position: fixed;
@@ -467,4 +470,8 @@
   align-items: center;
   cursor: pointer;
   overflow: hidden;
+}
+.wechat-toc-qrcode-container.is-right {
+  right: unset;
+  left: 40px;
 }
