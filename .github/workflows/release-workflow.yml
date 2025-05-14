@@ -59,6 +59,7 @@ jobs:
           prerelease: false
           body: |
             This is the release for version ${{ env.VERSION }}.
+          token: ${{ secrets.GITHUB_TOKEN }}  # Add this line
 
       # Upload Chrome release asset
       - name: Upload Chrome release asset
