@@ -52,6 +52,8 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}
           release_name: Release ${{ github.ref_name }}
@@ -59,7 +61,6 @@ jobs:
           prerelease: false
           body: |
             This is the release for version ${{ env.VERSION }}.
-          token: ${{ secrets.GITHUB_TOKEN }}  # Add this line
 
       # Upload Chrome release asset
       - name: Upload Chrome release asset
