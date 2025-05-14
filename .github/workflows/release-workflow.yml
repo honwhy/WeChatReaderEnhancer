@@ -56,6 +56,8 @@ jobs:
       # Upload Chrome release asset
       - name: Upload Chrome release asset
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: .output/wechat-reader-enhancer-${{ steps.package-version.outputs.current-version }}-chrome.zip
@@ -65,6 +67,8 @@ jobs:
       # Upload Firefox release asset
       - name: Upload Firefox release asset
         uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: .output/wechat-reader-enhancer-${{ steps.package-version.outputs.current-version }}-firefox.zip
