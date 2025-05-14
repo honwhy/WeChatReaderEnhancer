@@ -7,6 +7,8 @@
   <a href="https://www.xiaohongshu.com/user/profile/63eccfa2000000002600707d" target="_blank"><img src="https://img.shields.io/badge/小红书-Xiaohongshu-red" alt="小红书"></a>
 </p>
 
+[![Build and Release](https://github.com/honwhy/WeChatReaderEnhancer/actions/workflows/release-workflow.yml/badge.svg)](https://github.com/honwhy/WeChatReaderEnhancer/actions/workflows/release-workflow.yml)
+
 ## 📖 项目简介
 
 公众号阅读增强插件是一款 Chrome 浏览器扩展，旨在提升用户在电脑上阅读微信公众号文章的体验。本插件提供多种功能增强，让阅读体验更加舒适高效。
