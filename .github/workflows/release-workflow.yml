@@ -66,7 +66,7 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./out/wechat-reader-enhancer-${{ steps.package-version.outputs.current-version }}-chrome.zip
+          asset_path: ./output/wechat-reader-enhancer-${{ steps.package-version.outputs.current-version }}-chrome.zip
           asset_name: wechat-reader-enhancer-${{ steps.package-version.outputs.current-version }}-chrome.zip
           asset_content_type: application/zip
 
@@ -75,6 +75,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./out/wechat-reader-enhancer-${{ steps.package-version.outputs.current-version }}-firefox.zip
+          asset_path: ./output/wechat-reader-enhancer-${{ steps.package-version.outputs.current-version }}-firefox.zip
           asset_name: wechat-reader-enhancer-${{ steps.package-version.outputs.current-version }}-firefox.zip
           asset_content_type: application/zip
