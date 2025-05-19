@@ -7,6 +7,8 @@ export const defaultSettings: Settings = {
   minLevel: 1, // 识别的最小标题级别
   maxLevel: 6, // 识别的最大标题级别
   tocPosition: `left`, // 目录位置
+  useSerifFont: `0`, // 是否使用衬线字体
+  justifyText: `0`, // 是否使用对齐文本
   isEnabled: true,
   serviceType: ``,
   endpoint: ``,

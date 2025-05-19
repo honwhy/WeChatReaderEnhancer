@@ -184,6 +184,66 @@ function showMessage(message: string, isError: boolean = false) {
       </div>
     </div>
 
+    <!-- 使用衬线字体 -->
+    <label>使用衬线字体</label>
+    <div class="flex-between">
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <label>
+          <input
+            v-model="settings.useSerifFont"
+            type="radio"
+            value="1"
+            aria-label="是"
+            title="是"
+            name="useSerifFont"
+            @change="updateSettings(settings)"
+          >
+          是
+        </label>
+        <label>
+          <input
+            v-model="settings.useSerifFont"
+            type="radio"
+            value="0"
+            aria-label="否"
+            title="否"
+            name="useSerifFont"
+            @change="updateSettings(settings)"
+          >
+          否
+        </label>
+      </div>
+    </div>
+    <!-- 文本左右对齐 -->
+    <label>文本左右对齐</label>
+    <div class="flex-between">
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <label>
+          <input
+            v-model="settings.justifyText"
+            type="radio"
+            value="1"
+            aria-label="是"
+            title="是"
+            name="justifyText"
+            @change="updateSettings(settings)"
+          >
+          是
+        </label>
+        <label>
+          <input
+            v-model="settings.justifyText"
+            type="radio"
+            value="0"
+            aria-label="否"
+            title="否"
+            name="justifyText"
+            @change="updateSettings(settings)"
+          >
+          否
+        </label>
+      </div>
+    </div>
     <div class="buttons">
       <button id="resetButton" class="secondary" @click="onReset">
         恢复默认

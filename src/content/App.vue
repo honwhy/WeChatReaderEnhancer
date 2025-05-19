@@ -80,6 +80,26 @@ function buildToc() {
   // 获取文章标题
   articleTitle.value = getArticleTitle()
 }
+function handleSeriFont() {
+  if (settings.value.useSerifFont === `1`) {
+    if (!document.body.classList?.contains(`wre-serif-fonts`)) {
+      addClass(document.body, `wre-serif-fonts`)
+    }
+  }
+  else {
+    removeClass(document.body, `wre-serif-fonts`)
+  }
+}
+function handleJustifyText() {
+  if (settings.value.justifyText === `1`) {
+    if (!document.body.classList?.contains(`text-justify`)) {
+      addClass(document.body, `text-justify`)
+    }
+  }
+  else {
+    removeClass(document.body, `text-justify`)
+  }
+}
 /**
  * 初始化插件
  */
@@ -97,6 +117,11 @@ async function init() {
 
     // addVerticalText()
     initLinkifier()
+
+    // 是否使用衬线字体
+    handleSeriFont()
+    // 是否使用文本对齐
+    handleJustifyText()
     console.log(`公众号阅读增强插件初始化完成`)
   }
   catch (error) {
@@ -115,6 +140,8 @@ async function update() {
     // 初始化滚动监听
     initScrollObserver(toRaw(itemList.value))
     createQrCode()
+    handleSeriFont()
+    handleJustifyText()
   }
   catch (error) {
     console.error(`公众号阅读增强插件更新失败:`, error)

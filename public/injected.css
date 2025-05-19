@@ -1,8 +1,11 @@
-body.wx_wap_page.serif-fonts {
+body.wx_wap_page.wre-serif-fonts {
   font-family:
     SimSun,
     Times New Roman,
     Georgia,
     Merriweather,
     Playfair Display;
+}
+body.wx_wap_page.text-justify p {
+  text-align: justify;
 }

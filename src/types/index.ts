@@ -18,6 +18,8 @@ export interface Settings {
   minLevel: number // 识别的最小标题级别
   maxLevel: number // 识别的最大标题级别
   tocPosition: string // 目录位置 (left/right)
+  useSerifFont: string // 是否使用衬线字体
+  justifyText: string // 是否使用对齐文本
   isEnabled: boolean // 插件是否启用
   serviceType: string // 模型服务类型
   endpoint: string // 模型API地址
