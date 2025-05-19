@@ -12,6 +12,15 @@ export default defineContentScript({
   cssInjectionMode: `ui`,
 
   async main(ctx) {
+    // 2. Inject CSS styles
+    const hostCssUrl = browser.runtime.getURL(`/injected.css`) // 确保路径正确
+
+    const hostLink = document.createElement(`link`)
+    hostLink.rel = `stylesheet`
+    hostLink.href = hostCssUrl
+    document.head.appendChild(hostLink)
+
+    console.log(`宿主 CSS 已注入`) // 调试信息
     // 3. Define your UI
     const ui = await createShadowRootUi(ctx, {
       name: `wechat-toc`,
