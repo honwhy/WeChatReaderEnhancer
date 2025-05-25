@@ -5,6 +5,7 @@ import QRCode from 'qrcode'
 import readingTime from 'reading-time/lib/reading-time'
 import { onMounted, onUnmounted, type PropType, ref, toRaw } from 'vue'
 import { useSettings } from '../composable/config'
+import { useScanImages } from '../composable/scan'
 import { MessageType } from '../types'
 import { addClass, createElement, findHeadings, removeClass, scrollToElement, toggleClass } from '../utils/dom'
 import { getReadingPosition } from '../utils/storage'
@@ -100,6 +101,7 @@ function handleJustifyText() {
     removeClass(document.body, `text-justify`)
   }
 }
+useScanImages()
 /**
  * 初始化插件
  */
