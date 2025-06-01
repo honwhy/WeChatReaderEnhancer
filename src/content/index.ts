@@ -1,3 +1,4 @@
+import type { PublicPath } from 'wxt/browser'
 import { createApp } from 'vue'
 import App from './App.vue'
 /**
@@ -13,7 +14,7 @@ export default defineContentScript({
 
   async main(ctx) {
     // 2. Inject CSS styles
-    const hostCssUrl = browser.runtime.getURL(`/injected.css`) // 确保路径正确
+    const hostCssUrl = browser.runtime.getURL(`/injected.css` as PublicPath) // 确保路径正确
 
     const hostLink = document.createElement(`link`)
     hostLink.rel = `stylesheet`
