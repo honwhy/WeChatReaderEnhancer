@@ -8,7 +8,7 @@ export default defineConfig({
   manifest: ({ mode }) => ({
     name: `公众号阅读增强器`,
     icons: {
-      128: mode === `development` ? `/icon/icon256-gray.png` : `/icon/icon128.png`,
+      128: mode === `development` ? `/icon/icon96-gray.png` : `/icon/icon96.png`,
     },
     permissions: [`storage`],
     web_accessible_resources: [

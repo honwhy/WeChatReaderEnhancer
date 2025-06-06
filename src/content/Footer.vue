@@ -12,7 +12,7 @@ const socialLinks = [
   },
   {
     name: `小红书`,
-    url: `https://www.xiaohongshu.com/user/profile/63eccfa2000000002600707d`,
+    url: `https://www.xiaohongshu.com/user/profile/62aeebfc000000001b003dcc`,
     icon: browser.runtime.getURL(`/logo/xhs.png`),
   },
 ]

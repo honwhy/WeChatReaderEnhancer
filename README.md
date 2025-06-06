@@ -4,7 +4,7 @@
   <a href="https://web.okjike.com/u/ec41d7d5-407d-4395-ac8a-bd0f04fb202c" target="_blank"><img src="https://img.shields.io/badge/即刻-Jike-yellow" alt="即刻"></a>
   <a href="https://x.com/huangzh65903362" target="_blank"><img src="https://img.shields.io/badge/Twitter-X-black" alt="推特X"></a>
   <a href="https://space.bilibili.com/444418069" target="_blank"><img src="https://img.shields.io/badge/Bilibili-哔哩哔哩-pink" alt="哔哩哔哩"></a>
-  <a href="https://www.xiaohongshu.com/user/profile/63eccfa2000000002600707d" target="_blank"><img src="https://img.shields.io/badge/小红书-Xiaohongshu-red" alt="小红书"></a>
+  <a href="https://www.xiaohongshu.com/user/profile/62aeebfc000000001b003dcc" target="_blank"><img src="https://img.shields.io/badge/小红书-Xiaohongshu-red" alt="小红书"></a>
 </p>
 
 [![Build and Release](https://github.com/honwhy/WeChatReaderEnhancer/actions/workflows/release-workflow.yml/badge.svg)](https://github.com/honwhy/WeChatReaderEnhancer/actions/workflows/release-workflow.yml)
@@ -136,19 +136,19 @@ WeChatReaderEnhancer/
 2. 启动开发服务器（自动监听文件变化并重新构建）
 
    ```bash
-   npm run dev
+   pnpm dev
    ```
 
 3. 构建生产版本
    ```bash
-   npm run build
+   pnpm zip
    ```
 
 ### 调试扩展
 
 1. 在Chrome中打开 chrome://extensions/
 2. 启用"开发者模式"
-3. 点击"加载已解压的扩展程序"，选择项目的`dist`目录
+3. 点击"加载已解压的扩展程序"，选择项目的`.output/chrome-mv3-dev`目录
 4. 访问任意微信公众号文章测试功能
 
 ## 🐛 常见问题
@@ -174,7 +174,7 @@ A: 插件经过性能优化，对页面加载速度影响极小。它仅在页�
   - [即刻](https://web.okjike.com/u/ec41d7d5-407d-4395-ac8a-bd0f04fb202c)
   - [推特X](https://x.com/huangzh65903362)
   - [哔哩哔哩](https://space.bilibili.com/444418069)
-  - [小红书](https://www.xiaohongshu.com/user/profile/63eccfa2000000002600707d)
+  - [小红书](https://www.xiaohongshu.com/user/profile/62aeebfc000000001b003dcc)
 
 ## 🙏 鸣谢
 
