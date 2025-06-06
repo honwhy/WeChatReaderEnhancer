@@ -24,3 +24,7 @@ web-ext.config.ts
 *.njsproj
 *.sln
 *.sw?
+
+# vitepress
+docs/.vitepress/dist
+docs/.vitepress/cache

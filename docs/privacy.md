@@ -45,6 +45,6 @@
 
 如果您对本隐私协议有任何疑问或担忧，欢迎通过以下方式联系我们：
 
-- 在我们的 GitHub 仓库提交 Issue：[https://github.com/someone1128/WeChatReaderEnhancer/issues](https://github.com/someone1128/WeChatReaderEnhancer/issues)
+- 在我们的 GitHub 仓库提交 Issue：[https://github.com/honwhy/WeChatReaderEnhancer/issues](https://github.com/honwhy/WeChatReaderEnhancer/issues)
 
 感谢您使用公众号阅读增强器！

@@ -1,0 +1,40 @@
+<svg viewBox="0 0 160 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0" y1="0" x2="160" y2="192" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4BC7FF" />
+      <stop offset="1" stop-color="#BD36FF" />
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="160" height="192" rx="24" fill="#0f0f0f"/>
+
+  <g filter="url(#glow)">
+    <rect x="20" y="28" width="120" height="36" rx="6" fill="url(#grad1)"/>
+    <text x="28" y="52" fill="white" font-size="10" font-family="sans-serif">公众号阅读增强</text>
+  </g>
+
+  <g filter="url(#glow)">
+    <rect x="20" y="80" width="120" height="20" rx="4" fill="#1e1e1e" stroke="#4BC7FF" stroke-width="1.5"/>
+    <text x="24" y="94" fill="#ffffff" font-size="7" font-family="sans-serif">📖 自动生成目录</text>
+  </g>
+
+  <g filter="url(#glow)">
+    <rect x="20" y="110" width="120" height="20" rx="4" fill="#1e1e1e" stroke="#BD36FF" stroke-width="1.5"/>
+    <text x="24" y="124" fill="#ffffff" font-size="7" font-family="sans-serif">🖼️ 图片优化查看</text>
+  </g>
+
+  <g filter="url(#glow)">
+    <rect x="20" y="140" width="120" height="20" rx="4" fill="#1e1e1e" stroke="#FFDD35" stroke-width="1.5"/>
+    <text x="24" y="154" fill="#ffffff" font-size="7" font-family="sans-serif">🚀 阅读体验提升</text>
+  </g>
+
+  <circle cx="140" cy="24" r="2" fill="#FFF176"/>
+  <circle cx="16" cy="170" r="1.5" fill="#FFEB3B"/>
+</svg>

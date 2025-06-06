@@ -13,7 +13,10 @@
     "zip:firefox": "wxt zip -b firefox",
     "compile": "vue-tsc --noEmit",
     "lint": "eslint . --fix",
-    "postinstall": "simple-git-hooks && wxt prepare"
+    "postinstall": "simple-git-hooks && wxt prepare",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
     "@joplin/turndown-plugin-gfm": "^1.0.62",
@@ -46,6 +49,7 @@
     "simple-git-hooks": "^2.12.1",
     "typescript": "5.6.3",
     "unocss": "^66.1.0",
+    "vitepress": "^1.6.3",
     "vue-tsc": "^2.2.10",
     "wxt": "^0.20.6"
   },
