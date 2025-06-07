@@ -7,7 +7,7 @@ hero:
   text: "让微信公众号阅读体验更舒适"
   tagline: 自动生成文章目录，优化图片查看，让阅读长文不再迷失，提升浏览体验。
   image:
-    src: /hero.svg
+    src: /logo.svg
   actions:
     - theme: brand
       text: 功能介绍
