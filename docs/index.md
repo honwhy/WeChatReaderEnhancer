@@ -11,7 +11,7 @@ hero:
   actions:
     - theme: brand
       text: 功能介绍
-      link: /markdown-examples
+      link: /product-requirements
     - theme: alt
       text: Github
       link: https://github.com/honwhy/WeChatReaderEnhancer
