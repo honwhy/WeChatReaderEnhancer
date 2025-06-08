@@ -36,6 +36,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '功能介绍', link: '/product-requirements' },
+      { text: '插件配置', link: '/configure' },
       { text: '隐私协议', link: '/privacy' },
     ],
 
@@ -44,6 +45,7 @@ export default defineConfig({
         text: '功能介绍',
         items: [
           { text: '产品功能', link: '/product-requirements' },
+          { text: '功能特性', link: '/examples' },
           { text: '常见问题', link: '/faq' }
         ]
       }

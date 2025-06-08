@@ -102,6 +102,18 @@ function handleJustifyText() {
     removeClass(document.body, `text-justify`)
   }
 }
+function getArticleContent() {
+  const original = document.querySelector(`#js_content`)
+  if (original) {
+    const clone = original.cloneNode(true) // 深拷贝
+    const toRemove = clone.querySelector(`.wechat-toc-summary-container`)
+    if (toRemove) {
+      toRemove.remove()
+    }
+    return clone.textContent || ``
+  }
+  return ``
+}
 function addAIDectectButton() {
   const container = document.querySelector(`#activity-name`)
   if (container) {
@@ -111,14 +123,8 @@ function addAIDectectButton() {
     container.appendChild(span)
     span.addEventListener(`click`, async () => {
       // 将文章以纯文本的方式写入到 storage 中
-      const original = document.querySelector(`#js_content`)
-      if (original) {
-        const clone = original.cloneNode(true) // 深拷贝
-        const toRemove = clone.querySelector(`.wechat-toc-summary-container`)
-        if (toRemove) {
-          toRemove.remove()
-        }
-        const filteredText = clone.textContent
+      const filteredText = getArticleContent()
+      if (filteredText) {
         saveArticleContent(filteredText || ``)
         browser.runtime.sendMessage({
           type: MessageType.OPEN_AI_DETECT,
@@ -277,7 +283,7 @@ async function addReadingTime() {
     console.warn(`未找到 meta_content`)
     return
   }
-  const { minutes } = readingTime(document.body.textContent)
+  const { minutes } = readingTime(getArticleContent())
   const readingTimeContainer = createElement(`span`, {
     class: `rich_media_meta rich_media_meta_text wechat-toc-reading-time`,
     title: `预计阅读时间`,
