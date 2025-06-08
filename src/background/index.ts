@@ -7,6 +7,7 @@ import type { Requests } from '../types'
 import { defaultSettings } from '../composable/config'
 import { MessageType } from '../types'
 import { chat } from './agent'
+import { openAiDetectPage } from './ai-detect'
 
 export default defineBackground(() => {
   console.log(`公众号阅读增强插件背景服务工作进程已启动`, { id: browser.runtime.id })
@@ -28,6 +29,10 @@ export default defineBackground(() => {
     if (message.type === MessageType.GET_SUMMARY) {
       return chat(message.data)
     }
+    if (message.type === MessageType.OPEN_AI_DETECT) {
+      return openAiDetectPage()
+    }
+    console.warn(`未知消息类型`, message.type)
     return true
   })
 })

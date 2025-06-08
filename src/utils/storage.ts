@@ -38,3 +38,15 @@ function hashString(str: string): string {
 
   return Math.abs(hash).toString(36)
 }
+const article_key = `local:we-toc-article-content`
+export async function saveArticleContent(text: string) {
+  storage.setItem<string>(article_key, text)
+}
+export async function getArticleContent() {
+  return await storage.getItem<string>(article_key)
+}
+export function watchArticleContent(callback: (newValue: string | null, oldValue: string | null) => void) {
+  return storage.watch<string>(article_key, (newValue, oldValue) => {
+    callback(newValue, oldValue)
+  })
+}

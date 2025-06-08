@@ -1,5 +1,6 @@
 <script setup lang="tsx">
 import type { ChatCompletionResponse, Settings, TocItem } from '../types'
+import { injectScript } from '#imports'
 import { marked } from 'marked'
 import QRCode from 'qrcode'
 import readingTime from 'reading-time/lib/reading-time'
@@ -8,7 +9,7 @@ import { useSettings } from '../composable/config'
 import { useScanImages } from '../composable/scan'
 import { MessageType } from '../types'
 import { addClass, createElement, findHeadings, removeClass, scrollToElement, toggleClass } from '../utils/dom'
-import { getReadingPosition } from '../utils/storage'
+import { getReadingPosition, saveArticleContent } from '../utils/storage'
 import { transformHtml2Markdown } from '../utils/turndown'
 import Footer from './Footer.vue'
 import { destroyImageViewer, initImageViewer } from './imageViewer'
@@ -101,6 +102,40 @@ function handleJustifyText() {
     removeClass(document.body, `text-justify`)
   }
 }
+function addAIDectectButton() {
+  const container = document.querySelector(`#activity-name`)
+  if (container) {
+    const span = document.createElement(`span`)
+    span.className = `wechat-toc-ai-detect-button`
+    span.textContent = `去AI检测`
+    container.appendChild(span)
+    span.addEventListener(`click`, async () => {
+      // 将文章以纯文本的方式写入到 storage 中
+      const original = document.querySelector(`#js_content`)
+      if (original) {
+        const clone = original.cloneNode(true) // 深拷贝
+        const toRemove = clone.querySelector(`.wechat-toc-summary-container`)
+        if (toRemove) {
+          toRemove.remove()
+        }
+        const filteredText = clone.textContent
+        saveArticleContent(filteredText || ``)
+        browser.runtime.sendMessage({
+          type: MessageType.OPEN_AI_DETECT,
+        }).then(() => {
+          console.log(`AI检测按钮点击，已发送消息`)
+        }).catch((error) => {
+          console.error(`AI检测按钮点击失败:`, error)
+        })
+      }
+    })
+  }
+}
+async function addUpToTopButton() {
+  await injectScript(`/up-to-top.js`, {
+    keepInDom: true,
+  })
+}
 useScanImages()
 /**
  * 初始化插件
@@ -117,13 +152,20 @@ async function init() {
     // 初始化滚动监听
     initScrollObserver(toRaw(itemList.value))
 
-    // addVerticalText()
+    // http/https 文本转超链接
     initLinkifier()
+    await injectScript(`/wechat-linkifier-injected.js`, {
+      keepInDom: true,
+    })
 
     // 是否使用衬线字体
     handleSeriFont()
     // 是否使用文本对齐
     handleJustifyText()
+    // 去AI 检测
+    addAIDectectButton()
+    // 返回顶部
+    addUpToTopButton()
     console.log(`公众号阅读增强插件初始化完成`)
   }
   catch (error) {

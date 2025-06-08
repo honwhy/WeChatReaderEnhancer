@@ -34,7 +34,7 @@ export function useSettings(handleSettingsChange: (settings: Settings) => void) 
   onMounted(async () => {
     console.log(`useSettings mounted`)
     const item = await storage.getItem<Settings>(`sync:settings`)
-    console.log(`useSettings getItem`, item)
+    // console.log(`useSettings getItem`, item)
     if (item) {
       settings.value = item
     }

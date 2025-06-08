@@ -10,10 +10,10 @@ export default defineConfig({
     icons: {
       128: mode === `development` ? `/icon/icon96-gray.png` : `/icon/icon96.png`,
     },
-    permissions: [`storage`],
+    permissions: [`storage`, `tabs`],
     web_accessible_resources: [
       {
-        resources: [`*.png`, `*.svg`, `*.css`],
+        resources: [`*.png`, `*.svg`, `*.css`, `*.js`, `wechat-linkifier-injected.js`, `up-to-top.js`],
         matches: [`<all_urls>`],
       },
     ],

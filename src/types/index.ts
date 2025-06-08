@@ -54,6 +54,7 @@ export default {}
 // 请求类型
 export enum MessageType {
   GET_SUMMARY, // 获取摘要
+  OPEN_AI_DETECT, // AI检测
 }
 export interface Requests {
   type: MessageType // 请求类型

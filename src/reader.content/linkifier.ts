@@ -39,7 +39,7 @@ export function initLinkifier(): void {
     console.log(`初始化链接识别...`)
 
     // 添加动态处理悬停样式的脚本
-    addHoverScript()
+    // addHoverScript()
 
     // 处理当前页面上的文本
     processArticleLinks()
@@ -57,7 +57,7 @@ export function initLinkifier(): void {
 /**
  * 添加处理链接悬停效果的脚本
  */
-function addHoverScript(): void {
+function _addHoverScript(): void {
   // 检查是否已添加脚本
   if (document.getElementById(`wechat-linkifier-script`)) {
     return

@@ -9,3 +9,18 @@ body.wx_wap_page.wre-serif-fonts {
 body.wx_wap_page.text-justify p {
   text-align: justify;
 }
+
+.wechat-toc-ai-detect-button {
+  font-size: 0.5em;
+  padding: 0.2em 0.6em;
+  border: none;
+  border-radius: 4px;
+  background-color: #07c160;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.wechat-toc-ai-detect-button:hover {
+  background-color: #06a950;
+}
