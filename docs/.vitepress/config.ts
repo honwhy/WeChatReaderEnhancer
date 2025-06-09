@@ -12,14 +12,14 @@ export default defineConfig({
     ['meta', { name: 'theme-color', content: '#5f67ee' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'VitePress' }],
-    // [
-    //   'meta',
-    //   {
-    //     property: 'og:image',
-    //     content: 'https://vitepress.dev/vitepress-og.jpg'
-    //   }
-    // ],
-    // ['meta', { property: 'og:url', content: 'https://vitepress.dev/' }],
+    [
+      'meta',
+      {
+        property: 'og:image',
+        content: '/og.png'
+      }
+    ],
+    ['meta', { property: 'og:url', content: 'https://wxreader.honwhy.wang/' }],
     // [
     //   'script',
     //   {
