@@ -38,6 +38,6 @@ features:
 
 ## 立即安装
 
-- [Chrome](https://honwhy.wang/projects)
+- [Chrome](https://chromewebstore.google.com/detail/mbamjfdjbcdgpopfnkkmlohadbbnplhm)
 - [Edge](https://honwhy.wang/projects)
 - [Firefox](https://addons.mozilla.org/en-US/firefox/addon/%E5%85%AC%E4%BC%97%E5%8F%B7%E9%98%85%E8%AF%BB%E5%A2%9E%E5%BC%BA%E5%99%A8/)
