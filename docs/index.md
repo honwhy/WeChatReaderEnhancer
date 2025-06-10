@@ -33,8 +33,8 @@ features:
 
 ## 效果展示
 
-![alt1](./image/1.png)
-![alt2](./image/2.png)
+![alt1](./image/1.png){width=576px height=360px}
+![alt2](./image/2.png){width=576px height=360px}
 
 ## 立即安装
 
