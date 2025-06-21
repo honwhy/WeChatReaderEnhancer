@@ -30,6 +30,36 @@ export default defineConfig({
     //   }
     // ]
   ],
+  locales: {
+    root: {
+      label: '简体中文',
+      lang: 'zh-CN',
+    },
+    en: {
+      label: 'English',
+      lang: 'en-US',
+      link: '/en',
+      title: "Wechat Reader Enhancer",
+      themeConfig: {
+        nav: [
+          { text: 'Home', link: '/en/' },
+          { text: 'Features', link: '/en/features' },
+          { text: 'Configuration', link: '/en/configure' },
+          { text: 'Privacy Policy', link: '/en/privacy' },
+        ],
+        sidebar: [
+          {
+            text: 'Features',
+            items: [
+              { text: 'Product Functions', link: '/en/product-requirements' },
+              { text: 'Feature Highlights', link: '/en/features' },
+              { text: 'FAQ', link: '/en/faq' }
+            ]
+          }
+        ],
+      }
+    }
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/logo.svg',
