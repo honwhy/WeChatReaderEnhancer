@@ -105,7 +105,7 @@ function handleJustifyText() {
 function getArticleContent() {
   const original = document.querySelector(`#js_content`)
   if (original) {
-    const clone = original.cloneNode(true) // 深拷贝
+    const clone = original.cloneNode(true) as HTMLElement // 深拷贝
     const toRemove = clone.querySelector(`.wechat-toc-summary-container`)
     if (toRemove) {
       toRemove.remove()

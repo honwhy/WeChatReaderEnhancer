@@ -27,17 +27,40 @@ function wrapImageWithLink(img: HTMLImageElement, url: string) {
   a.appendChild(img)
 }
 
-async function processImages() {
+async function processImages(concurrency = 5) {
   const images = Array.from(document.images)
-  for (const img of images) {
-    const qrContent = await scanImageForQRCode(img)
-    if (qrContent && /^https?:\/\//i.test(qrContent)) {
-      if (!isWrappedInAnchor(img)) {
-        wrapImageWithLink(img, qrContent)
-        console.log(`Wrapped image with link: ${qrContent}`)
+  const queue = [...images]
+  const workers = []
+
+  async function worker() {
+    while (queue.length > 0) {
+      const img = queue.shift()
+      if (!img)
+        return
+      if (!img.src) {
+        continue
+      }
+      try {
+        const qrContent = await scanImageForQRCode(img)
+        if (qrContent && /^https?:\/\//i.test(qrContent)) {
+          if (!isWrappedInAnchor(img)) {
+            wrapImageWithLink(img, qrContent)
+            console.log(`Wrapped image with link: ${qrContent}`)
+          }
+        }
+      }
+      catch (error) {
+        console.error(`Error processing image:`, error)
       }
     }
   }
+
+  // 并发执行多个 worker
+  for (let i = 0; i < concurrency; i++) {
+    workers.push(worker())
+  }
+
+  await Promise.allSettled(workers)
 }
 
 // Initial scan
