@@ -3,7 +3,7 @@ import type { ChatCompletionResponse, Settings, TocItem } from '../types'
 import { injectScript } from '#imports'
 import { marked } from 'marked'
 import QRCode from 'qrcode'
-import readingTime from 'reading-time/lib/reading-time'
+import { readingTime } from 'reading-time-estimator'
 import { onMounted, onUnmounted, type PropType, ref, toRaw } from 'vue'
 import { useSettings } from '../composable/config'
 import { useScanImages } from '../composable/scan'
@@ -283,12 +283,12 @@ async function addReadingTime() {
     console.warn(`未找到 meta_content`)
     return
   }
-  const { minutes } = readingTime(getArticleContent())
+  const { minutes } = readingTime(getArticleContent(), 200, `zh-cn`)
   const readingTimeContainer = createElement(`span`, {
     class: `rich_media_meta rich_media_meta_text wechat-toc-reading-time`,
     title: `预计阅读时间`,
   })
-  readingTimeContainer.textContent = `(阅读大约需 ${Number.parseInt(minutes)} 分钟)`
+  readingTimeContainer.textContent = `(阅读大约需 ${minutes} 分钟)`
   metaContent.append(readingTimeContainer)
 }
 onMounted(async () => {

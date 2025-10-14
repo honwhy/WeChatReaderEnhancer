@@ -1,5 +1,6 @@
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import { defineConfig } from 'wxt'
+import toUtf8 from './plugins/vite-plugin-to-utf8'
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
@@ -21,6 +22,7 @@ export default defineConfig({
   vite: () => ({
     plugins: [
       vueJsx(),
+      toUtf8(),
     ],
   }),
 })
