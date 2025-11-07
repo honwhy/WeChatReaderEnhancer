@@ -14,6 +14,7 @@ export const defaultSettings: Settings = {
   endpoint: ``,
   apiKey: ``,
   modelName: ``,
+  prompt: ``,
 }
 export function useSettings(handleSettingsChange: (settings: Settings) => void) {
   const settings = ref<Settings>({ ...defaultSettings })

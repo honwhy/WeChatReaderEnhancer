@@ -25,6 +25,7 @@ export interface Settings {
   endpoint: string // 模型API地址
   apiKey: string // 模型API密钥
   modelName: string // 模型名称
+  prompt: string // 模型提示词
 }
 
 // 脚本泄露报告

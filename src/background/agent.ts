@@ -1,7 +1,7 @@
 import type { Settings } from '../types'
 import { ofetch } from 'ofetch'
 
-const template = `
+export const template = `
 请用中文撰写一篇100字以内的文章摘要，需包含核心观点、主要论据和结论。要求语言精炼、逻辑清晰，重点突出文章的核心价值与创新点，确保信息完整且无遗漏。
 
 优化说明：
@@ -31,7 +31,8 @@ export async function chat(body: { content: string, title: string }) {
       ],
     }
   }
-  const propmt = template.replace(`%title%`, body.title).replace(`%content%`, body.content)
+  const templates = settings.prompt?.trim() || template
+  const propmt = templates.replace(`%title%`, body.title).replace(`%content%`, body.content)
   // bailian
   // https://dashscope.aliyuncs.com/compatible-mode/
   // `qwen-plus`
