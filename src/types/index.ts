@@ -36,11 +36,11 @@ export interface ScriptLeakReport {
 }
 
 // 背景脚本消息类型
-export type BackgroundMessage =
-  | { type: `GET_SETTINGS` }
-  | { type: `SAVE_SETTINGS`, settings: Settings }
-  | { type: `REPORT_SCRIPT_LEAK`, details: any }
-  | { type: `CLEAN_SCRIPT_LEAK` }
+export type BackgroundMessage
+  = | { type: `GET_SETTINGS` }
+    | { type: `SAVE_SETTINGS`, settings: Settings }
+    | { type: `REPORT_SCRIPT_LEAK`, details: any }
+    | { type: `CLEAN_SCRIPT_LEAK` }
 
 // 背景脚本响应类型
 export type BackgroundResponse = { settings: Settings } | { success: boolean }

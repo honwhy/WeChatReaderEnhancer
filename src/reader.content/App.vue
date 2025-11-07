@@ -1,10 +1,11 @@
 <script setup lang="tsx">
+import type { PropType } from 'vue'
 import type { ChatCompletionResponse, Settings, TocItem } from '../types'
 import { injectScript } from '#imports'
 import { marked } from 'marked'
-import QRCode from 'qrcode'
+import * as QRCode from 'qrcode'
 import { readingTime } from 'reading-time-estimator'
-import { onMounted, onUnmounted, type PropType, ref, toRaw } from 'vue'
+import { onMounted, onUnmounted, ref, toRaw } from 'vue'
 import { useSettings } from '../composable/config'
 import { useScanImages } from '../composable/scan'
 import { MessageType } from '../types'
