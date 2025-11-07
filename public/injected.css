@@ -25,3 +25,16 @@ body.wx_wap_page.text-justify p {
 .wechat-toc-ai-detect-button:hover {
   background-color: #06a950;
 }
+
+blockquote.wechat-toc-summary-container {
+  color: var(--weui-FG-1);
+}
+blockquote.wechat-toc-summary-container {
+  padding-left: 10px;
+  border-left: 3px solid #dbdbdb;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 15px;
+  padding-top: 4px;
+  margin: 1em 0;
+  text-indent: 0;
+}
