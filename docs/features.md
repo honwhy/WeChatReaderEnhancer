@@ -63,6 +63,8 @@
 
 API Key 可以通过[阿里云百炼](https://bailian.console.aliyun.com/?tab=api#/api) 进行申请，申请可得百万免费token。
 
+用户可以选择自行配置API Key，同时也可以自定义提示词，注意可以使用的占位符 `%content%` 表示文章内容；`%title%` 表示文章标题。
+
 ## 阅读时间预估
 
 使用[reading-time](https://github.com/ngryman/reading-time) 阅读文章阅读时长，单位是分钟，预估标准每分钟阅读200个字。
