@@ -129,6 +129,7 @@ function addAIDectectButton() {
         saveArticleContent(filteredText || ``)
         browser.runtime.sendMessage({
           type: MessageType.OPEN_AI_DETECT,
+          url: window.location.href,
         }).then(() => {
           console.log(`AI检测按钮点击，已发送消息`)
         }).catch((error) => {

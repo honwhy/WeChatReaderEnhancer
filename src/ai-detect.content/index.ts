@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 
 export default defineContentScript({
-  matches: [`https://matrix.tencent.com/ai-detect/`],
+  matches: [`https://matrix.tencent.com/ai-detect/*`],
   // 2. Set cssInjectionMode
   cssInjectionMode: `manual`,
 

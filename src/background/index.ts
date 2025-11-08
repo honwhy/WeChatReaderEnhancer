@@ -30,7 +30,7 @@ export default defineBackground(() => {
       return chat(message.data)
     }
     if (message.type === MessageType.OPEN_AI_DETECT) {
-      return openAiDetectPage()
+      return openAiDetectPage(message.url)
     }
     console.warn(`未知消息类型`, message.type)
     return true

@@ -1,8 +1,9 @@
 import { browser } from '#imports'
 
-const targetUrl = `https://matrix.tencent.com/ai-detect/`
+const TENCET_MATRIX_URL = `https://matrix.tencent.com/ai-detect/`
 
-export async function openAiDetectPage() {
+export async function openAiDetectPage(url: string) {
+  const targetUrl = `${TENCET_MATRIX_URL}?from=${encodeURIComponent(url)}`
   try {
     const tabs = await browser.tabs.query({ url: targetUrl })
     if (tabs && tabs.length > 0) {
