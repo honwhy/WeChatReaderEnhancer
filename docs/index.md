@@ -13,8 +13,8 @@ hero:
       text: 功能介绍
       link: /product-requirements
     - theme: alt
-      text: Github
-      link: https://github.com/honwhy/WeChatReaderEnhancer
+      text: 立即安装
+      link: https://chromewebstore.google.com/detail/mbamjfdjbcdgpopfnkkmlohadbbnplhm
 
 features:
   - icon:
