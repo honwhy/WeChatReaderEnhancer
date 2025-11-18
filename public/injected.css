@@ -38,3 +38,7 @@ blockquote.wechat-toc-summary-container {
   margin: 1em 0;
   text-indent: 0;
 }
+blockquote.wechat-toc-summary-container ul,
+blockquote.wechat-toc-summary-container ol {
+  margin-left: 12px;
+}
