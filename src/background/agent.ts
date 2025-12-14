@@ -19,7 +19,10 @@ export const template = `
 
 export async function chat(body: { content: string, title: string }) {
   const settings = await storage.getItem<Settings>(`sync:settings`)
-  if (!settings || !settings.endpoint || !settings.apiKey || !settings.modelName) {
+  if (settings && settings.serviceType === `default`) {
+    console.debug(`使用默认的服务`)
+  }
+  else if (!settings || !settings.endpoint || !settings.apiKey || !settings.modelName) {
     console.error(`请先设置模型API地址、密钥和名称`)
     return {
       choices: [
@@ -40,7 +43,7 @@ export async function chat(body: { content: string, title: string }) {
     method: `POST`,
     headers: {
       'Content-Type': `application/json`,
-      'Authorization': `Bearer ${settings.apiKey}`,
+      'Authorization': settings.serviceType === `default` ? `` : `Bearer ${settings.apiKey}`,
     },
     body: {
       model: settings.modelName,

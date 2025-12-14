@@ -7,6 +7,12 @@ export interface ServiceOption {
 
 export const serviceOptions: ServiceOption[] = [
   {
+    value: `default`,
+    label: `default`,
+    endpoint: `https://open-gemini.honwhy.wang/v1`,
+    models: [`gemini-flash-latest`, `gemini-2.5-flash`],
+  },
+  {
     value: `deepseek`,
     label: `DeepSeek`,
     endpoint: `https://api.deepseek.com/v1`,

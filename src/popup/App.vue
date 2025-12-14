@@ -73,7 +73,13 @@ const currentService = computed(
   () => serviceOptions.find(s => s.value === settings.value.serviceType) || serviceOptions[0],
 )
 function handleModelSettingsChange() {
-  if (settings.value.serviceType && settings.value.apiKey && settings.value.modelName) {
+  if (settings.value.serviceType === `default` && settings.value.modelName) {
+    settings.value.apiKey = ``
+    settings.value.endpoint = currentService.value.endpoint
+    updateSettings(settings.value)
+    showMessage(`模型设置已保存`)
+  }
+  else if (settings.value.serviceType && settings.value.apiKey && settings.value.modelName) {
     settings.value.apiKey = settings.value.apiKey.trim()
     settings.value.endpoint = currentService.value.endpoint
     updateSettings(settings.value)
@@ -395,24 +401,6 @@ function showMessage(message: string, isError: boolean = false) {
     <ul class="friend-links-list">
       <li class="friend-link-item">
         <a
-          href="https://liuguangka.com/zh"
-          target="_blank"
-          rel="noopener noreferrer"
-          title="流光卡片 - 体验最佳的文字卡片工具"
-        >
-          <!-- You might need a local icon or keep it simple -->
-          <!-- <img src="path/to/liuguangka-icon.png" alt="流光卡片 icon" class="link-icon"> -->
-          <svg class="svg-icon link-icon" viewBox="0 0 24 24">
-            <path
-              d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"
-            />
-          </svg>
-          <!-- Generic link icon -->
-          流光卡片 - 文字卡片制作工具
-        </a>
-      </li>
-      <li class="friend-link-item">
-        <a
           href="https://honwhy.wang"
           target="_blank"
           rel="noopener noreferrer"
@@ -427,6 +415,24 @@ function showMessage(message: string, isError: boolean = false) {
           </svg>
           <!-- Generic link icon -->
           作者的个人网站 - Honwhy
+        </a>
+      </li>
+      <li class="friend-link-item">
+        <a
+          href="https://liuguangka.com/zh"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="流光卡片 - 体验最佳的文字卡片工具"
+        >
+          <!-- You might need a local icon or keep it simple -->
+          <!-- <img src="path/to/liuguangka-icon.png" alt="流光卡片 icon" class="link-icon"> -->
+          <svg class="svg-icon link-icon" viewBox="0 0 24 24">
+            <path
+              d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"
+            />
+          </svg>
+          <!-- Generic link icon -->
+          流光卡片 - 文字卡片制作工具
         </a>
       </li>
     </ul>
