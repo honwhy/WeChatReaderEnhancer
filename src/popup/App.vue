@@ -294,12 +294,12 @@ function showMessage(message: string, isError: boolean = false) {
         @blur="handleModelSettingsChange"
       >
     </div>
-    <label>模型名词</label>
+    <label>模型名称</label>
     <div class="flex">
       <select
         v-model="settings.modelName"
         style="width: 100%;"
-        aria-label="模型名词"
+        aria-label="模型名称"
         @change="handleModelSettingsChange"
       >
         <option v-for="(option, index) in currentService.models" :key="index" :value="option">
