@@ -76,6 +76,27 @@ export function initImageViewer(): void {
 }
 
 /**
+ * 去除微信图床 URL 末尾的尺寸限制，返回原图地址
+ *
+ * 微信图片 URL 形如：
+ *   https://mmbiz.qpic.cn/mmbiz_png/XXXX/640?from=appmsg#imgIndex=1
+ * 路径末尾的数字（如 640）是微信的分辨率标记，会返回被裁切/压缩的图。
+ * 微信约定用 0 表示不限制尺寸的原图，因此将末尾尺寸段替换为 0，
+ * medium-zoom 加载这张原图后会按其真实尺寸计算放大比例。
+ *
+ * @param url 原始图片 URL
+ * @returns 去除尺寸限制后的 URL；非微信图床或格式不匹配时原样返回
+ */
+function stripWeChatImageSizeLimit(url: string): string {
+  if (!url || !url.includes(`mmbiz.qpic.cn`)) {
+    return url
+  }
+  // 匹配路径最后一段的纯数字尺寸标记，锚定在 ? / # / 字符串结尾之前，
+  // 避免误伤路径中间的其它数字段。已是 0 时正则同样匹配，替换后结果不变。
+  return url.replace(/\/\d+(?=[?#]|$)/, `/0`)
+}
+
+/**
  * 处理文章中的所有图片，为其添加缩放属性
  */
 function processArticleImages(): void {
@@ -108,11 +129,13 @@ function prepareImageForZoom(img: HTMLImageElement): void {
     return
   }
 
-  // 优先使用data-src属性（通常包含原始图片URL）
-  const dataSrc = img.getAttribute(`data-src`)
-  if (dataSrc) {
-    // 设置data-zoom-src属性，medium-zoom将使用它作为缩放时的图片源
-    img.setAttribute(`data-zoom-src`, dataSrc)
+  // 解析原图 URL：优先 data-src（微信懒加载常把原图放这里），其次当前 src，
+  // 并去除微信图床末尾的 640 等尺寸限制，换成 /0 原图
+  const rawSrc = img.getAttribute(`data-src`) || img.src
+  const originalSrc = stripWeChatImageSizeLimit(rawSrc)
+  if (originalSrc) {
+    // 设置 data-zoom-src，medium-zoom 放大时会加载这张原图作为高清源
+    img.setAttribute(`data-zoom-src`, originalSrc)
   }
 
   // 标记为已处理
